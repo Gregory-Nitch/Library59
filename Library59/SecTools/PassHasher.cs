@@ -9,7 +9,7 @@ public class PassHasher
 {
     private const int _saltSize = 16;
     private const int _keySize = 64;
-    private const int _iterations = 100000;
+    private const int _iterations = 100_000;
     private static readonly HashAlgorithmName _algorithm = HashAlgorithmName.SHA512;
     private const char _delimiter = ':';
 

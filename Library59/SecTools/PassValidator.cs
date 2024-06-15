@@ -13,9 +13,9 @@ public partial class PassValidator
     private bool RequiresNumber = true;
     private bool RequiresLetter = true;
     private bool RequiresSpecial = false;
-    private Regex? WhiteList = null;
+    private Regex? Whitelist = null;
 
-    private Regex BlackList = BlackListRegex();
+    private Regex Blacklist = BlackListRegex();
     [GeneratedRegex("[^a-zA-Z0-9]")]
     private static partial Regex BlackListRegex();
 
@@ -37,9 +37,9 @@ public partial class PassValidator
     /// Constructs a validator with custom requirements.
     /// </summary>
     /// <param name="reqLen">Required length of passwords</param>
-    /// <param name="whiteList">Regex for whitelisting characters must be supplied for 
+    /// <param name="whitelist">Regex for whitelisting characters must be supplied for 
     /// settings that call for special characters</param>
-    /// <param name="blackList">Regex for blacklisting, default = [^a-zA-Z0-9] if not
+    /// <param name="blacklist">Regex for blacklisting, default = [^a-zA-Z0-9] if not
     /// supplied</param>
     /// <param name="reqsNum">Forces numbers in passwords</param>
     /// <param name="reqsLet">Forces letters in passwords</param>
@@ -48,42 +48,55 @@ public partial class PassValidator
     /// Regex is passed</exception>
     /// <exception cref="ArgumentException">Thrown if specials are not required but a whitelist
     /// has been supplied</exception>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown if required length <= 0</exception>
     public PassValidator(int reqLen,
-                         Regex? whiteList,
-                         Regex? blackList,
+                         Regex? whitelist,
+                         Regex? blacklist,
                          bool reqsNum,
                          bool reqsLet,
                          bool reqsSpec)
     {
+
+        if (reqLen < 1)
+        {
+            throw new ArgumentOutOfRangeException(nameof(reqLen), "ERR: Required password " +
+            $"length cannot be <= 0 (and ideally should not be less than 8) actual = {reqLen}...");
+        }
+        else if (!reqsNum && !reqsLet && !reqsSpec)
+        {
+            throw new ArgumentException("ERR: All password requirements are false, atleast one " +
+            "must be true...");
+        }
+
         RequiredLength = reqLen;
         RequiresNumber = reqsNum;
         RequiresLetter = reqsLet;
         RequiresSpecial = reqsSpec;
 
-        if (RequiresSpecial && whiteList == null)
+        if (RequiresSpecial && whitelist == null)
         {
-            throw new ArgumentNullException(nameof(whiteList), "Error: PassValidator is set to " +
+            throw new ArgumentNullException(nameof(whitelist), "ERR: PassValidator is set to " +
              "test for special characters but the whiteList Regex is null...");
         }
-        else if (!RequiresSpecial && whiteList != null)
+        else if (!RequiresSpecial && whitelist != null)
         {
-            throw new ArgumentException("Error: PassValidator is not set to test for special " +
+            throw new ArgumentException("ERR: PassValidator is not set to test for special " +
                 "characters but the whiteList Regex is not null, whiteList would NOT be used" +
                 "...");
         }
         else
         {
-            WhiteList = whiteList;
+            Whitelist = whitelist;
         }
 
-        if (WhiteList != null && blackList == null)
+        if (Whitelist != null && blacklist == null)
         {
-            throw new ArgumentNullException(nameof(blackList), "Error: Cannot use a whitelist " +
+            throw new ArgumentNullException(nameof(blacklist), "ERR: Cannot use a whitelist " +
             "with the default blacklist...");
         }
-        else if (blackList != null)
+        else if (blacklist != null)
         {
-            BlackList = blackList;
+            Blacklist = blacklist;
         }
     }
 
@@ -98,7 +111,7 @@ public partial class PassValidator
         {
             return false;
         }
-        else if (BlackList.IsMatch(rawPass))
+        else if (Blacklist.IsMatch(rawPass))
         {
             return false;
         }
@@ -125,7 +138,7 @@ public partial class PassValidator
             numberFlag = false;
         }
 
-        if (RequiresSpecial && WhiteList != null && !WhiteList.IsMatch(rawPass))
+        if (RequiresSpecial && Whitelist != null && !Whitelist.IsMatch(rawPass))
         {
             specialFlag = false;
         }

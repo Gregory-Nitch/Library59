@@ -61,6 +61,38 @@ public class PassValidatorTests
         Assert.Equal(expected, actual);
     }
 
+    [Theory]
+    [InlineData(0, null, null, true, true, false)]
+    [InlineData(8, null, null, false, false, false)]
+    [InlineData(8, null, null, true, true, true)]
+    [InlineData(8, ".\\w", null, true, true, false)]
+    [InlineData(8, ".\\w", null, true, true, true)]
+    public void TestPassValidatorThrows(int reqLen,
+                                        string? whitelistStr,
+                                        string? blacklistStr,
+                                        bool reqsNum,
+                                        bool reqsLet,
+                                        bool reqsSpec)
+    {
+        Regex? whitelist = null;
+        Regex? blacklist = null;
 
-    // TODO test throwing on Validator Construction
+        if (whitelistStr != null)
+        {
+            whitelist = new Regex(whitelistStr);
+        }
+        else if (blacklistStr != null)
+        {
+            blacklist = new Regex(blacklistStr);
+        }
+
+        PassValidator TestConstructor() => new(reqLen,
+                                              whitelist,
+                                              blacklist,
+                                              reqsNum,
+                                              reqsLet,
+                                              reqsSpec);
+
+        Assert.ThrowsAny<ArgumentException>(TestConstructor);
+    }
 }
