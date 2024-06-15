@@ -2,7 +2,7 @@ using System.Collections;
 using System.Text.RegularExpressions;
 using Library59.SecTools;
 
-namespace Library59Tests;
+namespace Library59Tests.SecToolsTests;
 
 public class PassValidatorTests
 {

@@ -24,4 +24,8 @@
     <ProjectReference Include="..\Library59\Library59.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="SecToolsTests\" />
+  </ItemGroup>
+
 </Project>
