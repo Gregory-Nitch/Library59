@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<properties>
-    <entry key="dbUrl">jdbc:mysql://localhost:3306/sampleDBName</entry>
-    <entry key="dbUser">sampleUser</entry>
-    <entry key="dbPassword">samplePass</entry>
-</properties>
-<!--NOTE: IF THIS FILE HAS SECRETS DO NOT ADD IT TO GIT!-->

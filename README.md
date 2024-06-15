@@ -1,7 +1,3 @@
 
-# lib59
-Java library of common &amp; useful tools
-
-## TODOs
-
-- implement JUnit tests
+# Library59
+C# library of common &amp; useful tools
