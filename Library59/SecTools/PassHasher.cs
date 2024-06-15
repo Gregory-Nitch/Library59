@@ -24,7 +24,8 @@ public class PassHasher
     {
         if (string.IsNullOrWhiteSpace(rawPass))
         {
-            throw new ArgumentNullException("Error: password to hash cannot be null || empty...");
+            throw new ArgumentNullException(nameof(rawPass),
+                                            "ERR: password to hash cannot be null || empty...");
         }
 
         byte[] salt = RandomNumberGenerator.GetBytes(_saltSize);
@@ -47,10 +48,15 @@ public class PassHasher
     /// </exception>
     public static bool VerifyPass(string rawPass, string hashSet)
     {
-        if (string.IsNullOrWhiteSpace(rawPass) || string.IsNullOrWhiteSpace(hashSet))
+        if (string.IsNullOrWhiteSpace(rawPass))
         {
-            throw new ArgumentNullException("Error: password to verify || hashSet cannot be null ||"
-            + " empty...");
+            throw new ArgumentNullException(nameof(rawPass),
+                "ERR: password to verify cannot be null || empty...");
+        }
+        else if (string.IsNullOrWhiteSpace(hashSet))
+        {
+            throw new ArgumentNullException(nameof(rawPass),
+                "ERR: hashSet cannot be null || empty...");
         }
 
         string[] hashSegments = hashSet.Split(_delimiter);
