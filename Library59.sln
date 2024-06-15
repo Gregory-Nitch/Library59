@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35004.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library59", "Library59\Library59.csproj", "{BCCC4512-19FF-4925-B87B-5CAE1C420078}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library59Tests", "Library59Tests\Library59Tests.csproj", "{D4396726-7DE7-4B13-B3C1-0B03FDEE4884}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8A3FBDAE-A283-4A0E-A6A4-101DCBDFA211}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+		.github\workflows\UnitTests.yml = .github\workflows\UnitTests.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BCCC4512-19FF-4925-B87B-5CAE1C420078}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCCC4512-19FF-4925-B87B-5CAE1C420078}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCCC4512-19FF-4925-B87B-5CAE1C420078}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCCC4512-19FF-4925-B87B-5CAE1C420078}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4396726-7DE7-4B13-B3C1-0B03FDEE4884}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4396726-7DE7-4B13-B3C1-0B03FDEE4884}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4396726-7DE7-4B13-B3C1-0B03FDEE4884}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4396726-7DE7-4B13-B3C1-0B03FDEE4884}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F4367502-7738-488D-8A02-8F9F5F9CFBA4}
+	EndGlobalSection
+EndGlobal

@@ -17,15 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Xunit" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Library59\Library59.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="SecToolsTests\" />
+    <Using Include="Xunit" />
   </ItemGroup>
 
 </Project>
