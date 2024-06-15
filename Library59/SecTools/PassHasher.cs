@@ -25,7 +25,7 @@ public class PassHasher
         if (string.IsNullOrWhiteSpace(rawPass))
         {
             throw new ArgumentNullException(nameof(rawPass),
-                                            "ERR: password to hash cannot be null || empty...");
+                "ERR: password to hash cannot be null || empty...");
         }
 
         byte[] salt = RandomNumberGenerator.GetBytes(_saltSize);
@@ -63,12 +63,12 @@ public class PassHasher
         byte[] hash = Convert.FromHexString(hashSegments[0]);
         byte[] salt = Convert.FromHexString(hashSegments[1]);
         int iterations = int.Parse(hashSegments[2]);
-        HashAlgorithmName algorithm = new HashAlgorithmName(hashSegments[3]);
+        HashAlgorithmName algorithm = new(hashSegments[3]);
 
         byte[] inputHash = Rfc2898DeriveBytes.Pbkdf2(rawPass,
                                                      salt,
                                                      iterations,
-                                                     _algorithm,
+                                                     algorithm,
                                                      hash.Length);
 
         return CryptographicOperations.FixedTimeEquals(hash, inputHash);

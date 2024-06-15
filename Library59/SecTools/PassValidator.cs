@@ -76,7 +76,7 @@ public partial class PassValidator
         if (RequiresSpecial && whitelist == null)
         {
             throw new ArgumentNullException(nameof(whitelist), "ERR: PassValidator is set to " +
-             "test for special characters but the whiteList Regex is null...");
+                "test for special characters but the whiteList Regex is null...");
         }
         else if (!RequiresSpecial && whitelist != null)
         {
@@ -92,7 +92,7 @@ public partial class PassValidator
         if (Whitelist != null && blacklist == null)
         {
             throw new ArgumentNullException(nameof(blacklist), "ERR: Cannot use a whitelist " +
-            "with the default blacklist...");
+                "with the default blacklist...");
         }
         else if (blacklist != null)
         {
