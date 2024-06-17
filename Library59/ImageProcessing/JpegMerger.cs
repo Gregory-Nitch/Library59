@@ -1,4 +1,5 @@
-﻿using SkiaSharp;
+﻿
+using SkiaSharp;
 
 namespace Library59.ImageProcessing;
 

@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿
+using System.Security.Cryptography;
 
 namespace Library59.SecTools;
 
