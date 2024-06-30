@@ -5,7 +5,10 @@ namespace Library59.ImageProcessing;
 
 public class JpegMerger
 {
-    public static SKBitmap MergeFrom2DList(List<List<string>> imgPathMatrix, string imgsDir, int imgHeights, int imgWidths)
+    public static SKBitmap MergeFrom2DList(List<List<string>> imgPathMatrix,
+                                           string imgsDir,
+                                           int imgHeights,
+                                           int imgWidths)
     {
         List<List<SKImage>> imgsToMerge = [];
         int outHeight = imgPathMatrix.Count * imgHeights;
@@ -53,15 +56,13 @@ public class JpegMerger
                                        string imgsDir,
                                        int imgHeights,
                                        int imgWidths,
-                                       string outFile,
                                        string outPath)
     {
-        string fullOutPath = Path.Combine(outPath, outFile);
         SKBitmap outMap = MergeFrom2DList(imgPathMatrix, imgsDir, imgHeights, imgWidths);
 
-        using (var stream = new FileStream(fullOutPath, FileMode.Create))
+        using (var fs = new FileStream(outPath, FileMode.Create))
         {
-            outMap.Encode(stream, SKEncodedImageFormat.Png, 100);
+            outMap.Encode(fs, SKEncodedImageFormat.Png, 100);
             outMap.Dispose();
         }
     }
