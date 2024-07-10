@@ -1,5 +1,4 @@
-﻿
-using Library59.SecTools;
+﻿using Library59.SecTools;
 
 namespace Library59Tests.SecToolsTests;
 

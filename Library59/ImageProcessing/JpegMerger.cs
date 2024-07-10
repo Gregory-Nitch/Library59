@@ -1,10 +1,20 @@
-﻿
-using SkiaSharp;
+﻿using SkiaSharp;
 
 namespace Library59.ImageProcessing;
 
+/// <summary>
+/// Merges Jpegs to single Png.
+/// </summary>
 public class JpegMerger
 {
+    /// <summary>
+    /// Merges a 2d list of image paths to a single SKBitmap.
+    /// </summary>
+    /// <param name="imgPathMatrix">2d list of image filenames</param>
+    /// <param name="imgsDir">directory containing images to merge</param>
+    /// <param name="imgHeights">height of images (assumed same size)</param>
+    /// <param name="imgWidths">width of images (assumed same size)</param>
+    /// <returns>SKBitmap of the merged images</returns>
     public static SKBitmap MergeFrom2DList(List<List<string>> imgPathMatrix,
                                            string imgsDir,
                                            int imgHeights,
@@ -14,6 +24,7 @@ public class JpegMerger
         int outHeight = imgPathMatrix.Count * imgHeights;
         int outWidth = imgPathMatrix.First().Count * imgWidths;
 
+        // Load images
         foreach (List<string> row in imgPathMatrix)
         {
             List<SKImage> imgRow = [];
@@ -29,6 +40,7 @@ public class JpegMerger
             imgsToMerge.Add(imgRow);
         }
 
+        // Create canvas, draw to it, pull merged Bitmap from canvas
         var surfaceInfo = new SKImageInfo(outWidth, outHeight);
         SKSurface surface = SKSurface.Create(surfaceInfo);
         var canvas = surface.Canvas;
@@ -52,6 +64,14 @@ public class JpegMerger
         return outMap;
     }
 
+    /// <summary>
+    /// Merges Jpegs with call to MergeFrom2DList() and saves to Png.
+    /// </summary>
+    /// <param name="imgPathMatrix">2d list of image filenames</param>
+    /// <param name="imgsDir">directory with images to merge</param>
+    /// <param name="imgHeights">height of images (assumed same size)</param>
+    /// <param name="imgWidths">width of images (assumed same size)</param>
+    /// <param name="outPath">combined directory and filename for output image</param>
     public static void MergeFrom2DListAndSaveToPng(List<List<string>> imgPathMatrix,
                                        string imgsDir,
                                        int imgHeights,
