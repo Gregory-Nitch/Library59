@@ -33,11 +33,11 @@ public static class StringSanitizer
             }
             if (string.IsNullOrWhiteSpace(input))
             {// String had only unsafe characters
-                throw new ArgumentNullException(nameof(input));
+                throw new ArgumentNullException(nameof(input), "ERR: Entry had only unsafe characters...");
             }
             return input;
         }
-        throw new ArgumentNullException(nameof(input));
+        throw new ArgumentNullException(nameof(input), "ERR: Cannot sanitize an empty string...");
     }
 
     public static readonly char[] SQLServerWhiteList =
