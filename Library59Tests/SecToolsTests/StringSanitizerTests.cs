@@ -10,7 +10,9 @@ public class StringSanitizerTests
     [InlineData("asdf$A'SDF%1234'", "asdfA'SDF1234'")]
     public void TestCheckForSQLServer(string input, string expected)
     {
-        string actual = StringSanitizer.CheckForSQLServer(input, 100);
+        string actual = StringSanitizer.CheckForSQLServer(input,
+                                                          100,
+                                                          StringSanitizer.SQLServerWhiteList);
         Assert.Equal(expected, actual);
     }
 
@@ -20,13 +22,17 @@ public class StringSanitizerTests
     [InlineData(null)]
     public void TestNullCheckForSQLServer(string input)
     {
-        Assert.Throws<ArgumentNullException>(() => StringSanitizer.CheckForSQLServer(input, 100));
+        Assert.Throws<ArgumentNullException>(() => StringSanitizer.CheckForSQLServer(input,
+                                                                                     100,
+                                                                                     StringSanitizer.SQLServerWhiteList));
     }
 
     [Theory]
     [InlineData("asdf")]
     public void TestRangeCheckForSQLServer(string input)
     {
-        Assert.Throws<ArgumentOutOfRangeException>(() => StringSanitizer.CheckForSQLServer(input, 1));
+        Assert.Throws<ArgumentOutOfRangeException>(() => StringSanitizer.CheckForSQLServer(input,
+                                                                                           1,
+                                                                                           StringSanitizer.SQLServerWhiteList));
     }
 }
