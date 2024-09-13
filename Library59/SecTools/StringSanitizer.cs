@@ -2,6 +2,16 @@ namespace Library59.SecTools;
 
 public static class StringSanitizer
 {
+    /// <summary>
+    /// Sanitizes a user variable input into SQL Server, ASSUMES ' character is already escaped.
+    /// </summary>
+    /// <param name="input">input from user</param>
+    /// <param name="maxLength">max expected lenth of input</param>
+    /// <returns>returns a string with all unsafe characters removed (' characters are untouched
+    /// </returns>
+    /// <exception cref="ArgumentOutOfRangeException">thrown if input is longer and max</exception>
+    /// <exception cref="ArgumentNullException">thrown if input is null or becomes empty during
+    /// sanitization</exception>
     public static string CheckForSQLServer(string input, int maxLength)
     {
         if (input != null && input.Length > maxLength)
@@ -22,24 +32,6 @@ public static class StringSanitizer
                 {
                     input = input.Remove(i, 1);
                     i--;
-                }
-            }
-
-            for (int i = 0; i < input.Length; i++)
-            {// Escape ' characters -> need only pairs -> ''
-                if (i < input.Length - 1 && input[i] == '\'' && input[i + 1] == '\'')
-                {
-                    i++;
-                }
-                else if (i < input.Length - 1 && input[i] == '\'' && input[i + 1] != '\'')
-                {
-                    input = input.Insert(i, "'");
-                    i++;
-                }
-                else if (input[i] == '\'')
-                {
-                    input = input.Insert(i, "'");
-                    i++;
                 }
             }
             if (string.IsNullOrWhiteSpace(input))
